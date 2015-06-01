@@ -24,3 +24,6 @@ path=(
   "$HOME/.dotfiles/bin"
   "opt/rubies/"
   )
+
+export DOTFILES=$HOME/.dotfiles
+export ZSH=$DOTFILES/zsh
