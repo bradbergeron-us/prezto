@@ -1,11 +1,26 @@
 #
 # Defines environment variables.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+
+# Set the list of directories that Zsh searches for programs.
+path=(
+  "/usr/local/{bin,sbin}"
+  "$HOME/"
+  '/Applications/Postgres.app/Contents/Versions/9.4/bin'
+  '/usr/local/heroku/bin'
+  '/usr/local/bin'
+  "$HOME/.rbenv/bin"
+  '/usr/bin'
+  '/bin'
+  '/usr/sbin'
+  '/sbin'
+  '/opt/X11/bin'
+  '/usr/local/bin/git'
+  "$HOME/.dotfiles/bin"
+  "opt/rubies/"
+  )
