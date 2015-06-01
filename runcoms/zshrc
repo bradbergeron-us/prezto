@@ -23,7 +23,7 @@ path=(
   "opt/rubies/"
   )
 # reload zsh config
-alias reload!='source ~/.zshrc'
+alias reload='source ~/.zshrc'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -64,6 +64,7 @@ alias dm='docker-machine'
 alias brewu= "brew update && brew upgrade && brew cleanup && brew prune && brew doctor"
 alias vimrc='vim ~/.vimrc'
 alias tmc='vim ~/.tmux.conf'
+
 
 # Applications
 alias mou='open -a Mou.app'
