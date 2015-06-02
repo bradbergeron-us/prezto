@@ -22,7 +22,6 @@ path=(
   '/opt/X11/bin'
   '/usr/local/bin/git'
   "$HOME/.dotfiles/bin"
-  "opt/rubies/"
   )
 
 export DOTFILES=$HOME/.dotfiles
