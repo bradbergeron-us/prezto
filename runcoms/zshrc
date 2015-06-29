@@ -48,6 +48,23 @@ alias la="ls -AF ${colorflag}"
 alias ll="ls -lFh ${colorflag}"
 alias lld="ls -l | grep ^d"
 alias rmf="rm -rf"
+alias lh="ls -al"
+alias ln="ln -v"
+alias mkdir="mkdir -p"
+alias e="$EDITOR"
+alias v="$VISUAL"
+
+# Bundler
+alias b="bundle"
+
+# Rails
+alias migrate="rake db:migrate db:rollback && rake db:migrate"
+alias s="rspec"
+
+# Pretty print the path
+alias path='echo $PATH | tr -s ":" "\n"'
+
+
 
 # Helpers
 alias grep='grep --color=auto'
@@ -69,7 +86,6 @@ alias dm='docker-machine'
 alias brewu= "brew update && brew upgrade && brew cleanup && brew prune && brew doctor"
 alias vimrc='vim ~/.vimrc'
 alias tmc='vim ~/.tmux.conf'
-
 
 
 # Applications
