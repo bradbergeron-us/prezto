@@ -26,6 +26,7 @@ alias reload='source ~/.zshrc'
 
 # Tmuxinator
 source ~/.dotfiles/bin/tmuxinator.bash
+export DISABLE_AUTO_TITLE=true
 
 export EDITOR='vim'
 
@@ -68,6 +69,7 @@ alias dm='docker-machine'
 alias brewu= "brew update && brew upgrade && brew cleanup && brew prune && brew doctor"
 alias vimrc='vim ~/.vimrc'
 alias tmc='vim ~/.tmux.conf'
+
 
 
 # Applications
