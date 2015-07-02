@@ -1,66 +1,32 @@
+# ----- zshenv ----- #
 #
-# Executes commands at login pre-zshrc.
-#
-# Browser
-#
+# ----- Defines environment varaibles ----- #
 
+# Ensure that a non-login, non-interactive shell has a defined environment.
+if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprofile"
+fi
+
+# ----- Executes commands at login pre-zshrc. ----- #
+
+
+# ----- Browser ----- #
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
-#
-# Editors
-#
+
+# ----- Editors ----- #
 
 export EDITOR='Vim'
 export VISUAL='Vim'
 export PAGER='less'
 
-#
-# Language
-#
+# ----- Language ----- #
 
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
-
-#
-# Paths
-#
-
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
-# Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
-
-# Set the list of directories that Zsh searches for programs.
-path=(
-  '/usr/local/sbin:$PATH'
-  "/usr/local/{bin,sbin}"
-  '/Applications/Postgres.app/Contents/Versions/9.4/bin'
-  '/usr/local/heroku/bin'
-  '/usr/local/bin'
-  '$HOME/.rbenv/bin'
-  '/usr/bin'
-  '/bin'
-  '/usr/sbin'
-  '/sbin'
-  '/opt/X11/bin'
-  '/usr/local/bin/git'
-  '$HOME/.dotfiles/bin'
-)
-eval "$(rbenv init -)"
-
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
-# Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
 
 # Set the list of directories that Zsh searches for programs.
 path=(
@@ -68,9 +34,8 @@ path=(
   $path
 )
 
-#
-# Less
-#
+
+# ----- Less ----- #
 
 # Set the default Less options.
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
@@ -83,9 +48,9 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
-#
-# Temporary Files
-#
+
+# ----- Temporary Files ----- #
+
 if [[ ! -d "$TMPDIR" ]]; then
   export TMPDIR="/tmp/$LOGNAME"
   mkdir -p -m 700 "$TMPDIR"
@@ -96,13 +61,3 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 # The orginal version is saved in .zprofile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
 export PATH
-#
-# Temporary Files
-#
-
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$LOGNAME"
-  mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
