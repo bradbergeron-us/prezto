@@ -29,184 +29,265 @@ This setting affects all aliases and functions that call `git-status`.
 Aliases
 -------
 
-### Git
-
-  - `g` is short for `git`.
-
-### Branch
-
-  - `gb` lists, creates, renames, and deletes branches.
-  - `gbc` creates a new branch.
-  - `gbl` lists branches and their commits.
-  - `gbL` lists local and remote branches and their commits.
-  - `gbs` lists branches and their commits with ancestry graphs.
-  - `gbS` lists local and remote branches and their commits with ancestry
-    graphs.
-  - `gbx` deletes a branch.
-  - `gbX` deletes a branch irrespective of its merged status.
-  - `gbm` renames a branch.
-  - `gbM` renames a branch even if the new branch name already exists.
-
-
-### Commit
-
-  - `gc` records changes to the repository.
-  - `gca` stages all modified and deleted files.
-  - `gcm` records changes to the repository with the given message.
-  - `gco` checks out a branch or paths to work tree.
-  - `gcO` checks out hunks from the index or the tree interactively.
-  - `gcf` amends the tip of the current branch using the same log message as
-    *HEAD*.
-  - `gcF` amends the tip of the current branch.
-  - `gcp` applies changes introduced by existing commits.
-  - `gcP` applies changes introduced by existing commits without committing.
-  - `gcr` reverts existing commits by reverting patches and recording new
-     commits.
-  - `gcR` removes the *HEAD* commit.
-  - `gcs` displays various types of objects.
-  - `gcl` lists lost commits.
-
-### Conflict
-
-  - `gCl` lists unmerged files.
-  - `gCa` adds unmerged file contents to the index.
-  - `gCe` executes merge-tool on all unmerged file.
-  - `gCo` checks out our changes for unmerged paths.
-  - `gCO` checks out our changes for all unmerged paths.
-  - `gCt` checks out their changes for unmerged paths.
-  - `gCT` checks out their changes for all unmerged paths.
-
-### Data
-
-  - `gd` displays information about files in the index and the work tree.
-  - `gdc` lists cached files.
-  - `gdx` lists deleted files.
-  - `gdm` lists modified files.
-  - `gdu` lists untracked files.
-  - `gdk` lists killed files.
-  - `gdi` lists ignored files.
-
-### Fetch
-
-  - `gf` downloads objects and references from another repository.
-  - `gfc` clones a repository into a new directory.
-  - `gfm` fetches from and merges with another repository or local branch.
-  - `gfr` fetches from and rebases on another repository or local branch.
-
-### Grep
-
-  - `gg` displays lines matching a pattern.
-  - `ggi` displays lines matching a pattern ignoring case.
-  - `ggl` lists files matching a pattern.
-  - `ggL` lists files that are not matching a pattern.
-  - `ggv` displays lines not matching a pattern.
-  - `ggw` displays lines matching a pattern at word boundary.
-
-### Index
-
-  - `gia` adds file contents to the index.
-  - `giA` adds file contents to the index interactively.
-  - `giu` adds file contents to the index (updates only known files).
-  - `gid` displays changes between the index and a named commit (diff).
-  - `giD` displays changes between the index and a named commit (word diff).
-  - `gir` resets the current HEAD to the specified state.
-  - `giR` resets the current index interactively.
-  - `gix` removes files/directories from the index (recursively).
-  - `giX` removes files/directories from the index (recursively and forced).
+## Settings
 
 ### Log
+zstyle -s ':prezto:module:git:log:medium' format '_git_log_medium_format' \
+  || _git_log_medium_format='%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'
+zstyle -s ':prezto:module:git:log:oneline' format '_git_log_oneline_format' \
+  || _git_log_oneline_format='%C(green)%h%C(reset) %s%C(red)%d%C(reset)%n'
+zstyle -s ':prezto:module:git:log:brief' format '_git_log_brief_format' \
+  || _git_log_brief_format='%C(green)%h%C(reset) %s%n%C(blue)(%ar by %an)%C(red)%d%C(reset)%n'
 
-  - `gl` displays the log.
-  - `gls` displays the stats log.
-  - `gld` displays the diff log.
-  - `glo` displays the one line log.
-  - `glg` displays the graph log.
-  - `glb` displays the brief commit log.
-  - `glc` displays the commit count for each contributor in descending order.
+### Status
+zstyle -s ':prezto:module:git:status:ignore' submodules '_git_status_ignore_submodules' \
+  || _git_status_ignore_submodules='none'
 
-### Merge
+## Aliases
 
-  - `gm` joins two or more development histories together.
-  - `gmC` joins two or more development histories together but does not commit.
-  - `gmF` joins two or more development histories together but does not commit
-     generating a merge commit even if the merge resolved as a fast-forward.
-  - `gma` aborts the conflict resolution, and reconstructs the pre-merge state.
-  - `gmt` runs the merge conflict resolution tools to resolve conflicts.
+ - g'git'
 
-### Push
+### Add (a)
+- 'ga' git add
+- 'gac' git add . && git commit
+- 'gacv' git add . && git commit --verbose
+- 'gap' git add -p
+- 'gast' git add . && git stash save
 
-  - `gp` updates remote refs along with associated objects.
-  - `gpf` forcefully updates remote refs along with associated objects.
-  - `gpa` updates remote branches along with associated objects.
-  - `gpA` updates remote branches and tags along with associated objects.
-  - `gpt` updates remote tags along with associated objects.
-  - `gpc` updates remote refs along with associated objects and adds *origin*
-     as an upstream reference for the current branch.
-  - `gpp` pulls and pushes from origin to origin.
+### Branch (b)
+- 'gb' git branch
+- 'gba' git branch -a
+- 'gbL' git branch -av
+- 'gbc' git checkout -b
+- 'gbx' git branch -d
+- 'gbd' git branch -D
+- 'gbX' git branch -D
+- 'gbdr' git push origin --delete
+- 'gbm' git branch -m
+- 'gbM' git branch -M
+- 'gbr' git branch -r
+- 'gbs' git show-branch
+- 'gbS' git show-branch -a
 
-### Rebase
+### Commit (c)
+### - 'gc'git commit'
+- 'gc' git commit --verbose
+- 'gca' git commit --verbose --all
+- 'gcam' git commit -a -m
+- 'gce' git commit --amend
+- 'gcf' git commit --amend --reuse-message HEAD
+- 'gcF' git commit --verbose --amend
+- 'gcl' git-commit-lost
+- 'gcm' git commit --message
+- 'gcp' git cherry-pick --ff
+- 'gcP' git cherry-pick --no-commit
+- 'gcr' git revert
+- 'gcR' git reset "HEAD^"
+- 'gcs' git show
+- 'gcv' git commit --verbose
 
-  - `gr` forward-ports local commits to the updated upstream head.
-  - `gra` aborts the rebase.
-  - `grc` continues the rebase after merge conflicts are resolved.
-  - `gri` makes a list of commits to be rebased and opens the editor.
-  - `grs` skips the current patch.
+### Checkout (co)
+- 'gco'git checkout
+- 'gcob'git checkout -b
+- 'gcom'git checkout master
+- 'gcO'git checkout --patch
 
-### Remote
+### Conflict (C)
+- 'gCl' git status | sed -n "s/^.*both [a-z]*ed: *//p"
+- 'gCa' git add $(gCl)
+- 'gCe' git mergetool $(gCl)
+- 'gCo' git checkout --ours --
+- 'gCO' gCo $(gCl)
+- 'gCt' git checkout --theirs --
+- 'gCT' gCt $(gCl)
 
-  - `gR` manages tracked repositories.
-  - `gRl` lists remote names and their URLs.
-  - `gRa` adds a new remote.
-  - `gRx` removes a remote.
-  - `gRm` renames a remote.
-  - `gRu` fetches remotes updates.
-  - `gRp` prunes all stale remote tracking branches.
-  - `gRs` displays information about a given remote.
-  - `gRb` opens a remote on [GitHub][3] in the default browser.
+### Diff (d)
+- 'gd' git diff
+- 'gdc' git diff --stat --color
+- 'gdcn' git diff --name-status
+- 'gdcs' git shortlog
+- 'gds' git diff --staged
+- 'gdst' git diff --stat
+- 'gdt' git difftool
+- 'gfb' git checkout -b
 
-### Stash
+### Data Listing (D)
+- 'gD' git ls-files
+- 'gDc' git ls-files --cached
+- 'gDx' git ls-files --deleted
+- 'gDm' git ls-files --modified
+- 'gDu' git ls-files --other --exclude-standard
+- 'gDk' git ls-files --killed
+- 'gDi' git status --porcelain --short --ignored | sed -n "s/^!! //p"
 
-  - `gs` stashes the changes of the dirty working directory.
-  - `gsa` applies the changes recorded in a stash to the working directory.
-  - `gsx` drops a stashed state.
-  - `gsX` drops all the stashed states.
-  - `gsl` lists stashed states.
-  - `gsL` lists dropped stashed states.
-  - `gsd` displays changes between the stash and its original parent.
-  - `gsp` removes and applies a single stashed state from the stash list.
-  - `gsr` recovers a given stashed state.
-  - `gss` stashes the changes of the dirty working directory, including untracked.
-  - `gsS` stashes the changes of the dirty working directory interactively.
-  - `gsw` stashes the changes of the dirty working directory retaining the index.
+### Fetch (f)
+- 'gf' git fetch
+- 'gfc' git clone
+- 'gfm' git pull
+- 'gfr' git pull --rebase
 
-### Submodule
+### Grep (g)
+- 'gg' git grep
+- 'ggi' git grep --ignore-case
+- 'ggl' git grep --files-with-matches
+- 'ggL' git grep --files-without-matches
+- 'ggv' git grep --invert-match
+- 'ggw' git grep --word-regexp
 
-  - `gS` initializes, updates, or inspects submodules.
-  - `gSa` adds given a repository as a submodule.
-  - `gSf` evaluates a shell command in each of checked out submodules.
-  - `gSi` initializes submodules.
-  - `gSI` initializes and clones submodules recursively.
-  - `gSl` lists the commits of all submodules.
-  - `gSm` moves a submodule.
-  - `gSs` synchronizes submodules' remote URL to the value specified in
-    .gitmodules.
-  - `gSu` fetches and merges the latest changes for all submodule.
-  - `gSx` removes a submodule.
+### Graph (g)
+- 'ggl' git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -15
+- 'gga' git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative
+- 'ggo' git log --oneline --stat
+- 'ggy' git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative --since yesterday
 
-### Working directory
+### Hub (h)
+- 'h' hub
+- 'hb' hub browse
+- 'hc' hub clone
+- 'hp' hub pull-request
 
-  - `gws` displays working-tree status in the short format.
-  - `gwS` displays working-tree status.
-  - `gwd` displays changes between the working tree and the index (diff).
-  - `gwD` displays changes between the working tree and the index (word diff).
-  - `gwr` resets the current HEAD to the specified state, does not touch the
-     index nor the working tree.
-  - `gwR` resets the current HEAD, index and working tree to the specified state.
-  - `gwc` removes untracked files from the working tree (dry-run).
-  - `gwC` removes untracked files from the working tree.
-  - `gwx` removes files from the working tree and from the index recursively.
-  - `gwX` removes files from the working tree and from the index recursively and
-    forcefully.
+### Index (i)
+- 'gia' git add
+- 'giA' git add --patch
+- 'giu' git add --update
+- 'gid' git diff --no-ext-diff --cached
+- 'giD' git diff --no-ext-diff --cached --word-diff
+- 'gir' git reset
+- 'giR' git reset --patch
+- 'gix' git rm -r --cached
+- 'giX' git rm -rf --cached
+
+### Log (l)
+- 'gl' git log --topo-order --pretty=format:"${_git_log_medium_format}"
+- 'gls' git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"
+- 'gld' git log --topo-order --stat --patch --full-diff --pretty=format:"${_git_log_medium_format}"
+- 'glo' git log --topo-order --pretty=format:"${_git_log_oneline_format}"
+- 'glg' git log --topo-order --all --graph --pretty=format:"${_git_log_oneline_format}"
+- 'glb' git log --topo-order --pretty=format:"${_git_log_brief_format}"
+- 'glc' git shortlog --summary --numbered
+
+### Pull (l)
+- 'gl' git pull'
+- 'glr' git pull --rebase
+
+### Merge (m)
+- 'gm' git merge
+- 'gma' git merge --abort
+- 'gmt' git mergetool
+- 'gmC' git merge --no-commit
+- 'gmF' git merge --no-ff
+- 'gmff' git merge --no-ff
+- 'gmm' git merge master
+
+### Pull (pp)
+- 'gpp' git pull --rebase && git push
+- 'gppt' git pull --rebase && git push && git push --tags
+- 'gpp' git pull origin "$(git-branch-current 2> /dev/null)" && git push origin "$(git-branch-current 2> /dev/null)"
+
+### Push (p)
+- 'gp' git push
+- 'gpc' git push --set-upstream origin "$(git-branch-current 2> /dev/null)"
+- 'gpf' git push --force
+- 'gpa' git push --all
+- 'gpA' git push --all && git push --tags
+- 'gpo' git push origin
+- 'gpom' git push origin master
+- 'gpt' git push --tags
+- 'gptb' git push -u origin
+
+### Rebase (r)
+- 'gr' git rebase
+- 'gra' git rebase --abort
+- 'grc' git rebase --continue
+- 'gri' git rebase --interactive
+- 'grs' git rebase --skip
+
+### Remote (r)
+- 'grpd' git remote prune origin --dry-run
+- 'grp' git remote prune origin
+
+### Remote (R)
+- 'gR' git remote
+- 'gRl' git remote --verbose
+- 'gRa' git remote add
+- 'gRx' git remote rm
+- 'gRm' git remote rename
+- 'gRu' git remote update
+- 'gRp' git remote prune
+- 'gRs' git remote show
+- 'gRb' git-hub-browse
+
+### Reset (r)
+- 'grd' git reset --hard
+- 'grh' git reset HEAD^
+
+### Status (s)
+- 'gs' git status
+- 'gss' git status -sb
+
+### Stash (st)
+- 'gst' git stash
+- 'gsta' git stash apply
+- 'gsts' git stash save
+- 'gsts' git stash save --include-untracked
+- 'gstS' git stash save --patch --no-keep-index
+- 'gstw' git stash save --include-untracked --keep-index
+- 'gstd' git stash drop stash@{0}
+- 'gsth' git stash show
+- 'gstd' git stash show --patch --stat
+- 'gstl' git stash list
+- 'gstp' git stash pop
+- 'gstx' git stash drop
+- 'gstL' git-stash-dropped
+- 'gstr' git-stash-recover
+- 'gstX' git-stash-clear-interactive
+
+### Submodule (S)
+- 'gS' git submodule
+- 'gSa' git submodule add
+- 'gSf' git submodule foreach
+- 'gSi' git submodule init
+- 'gSI' git submodule update --init --recursive
+- 'gSl' git submodule status
+- 'gSm' git-submodule-move
+- 'gSs' git submodule sync
+- 'gSu' git submodule foreach git pull origin master
+- 'gSx' git-submodule-remove
+
+### Working Copy (w)
+- 'gws' git status --ignore-submodules=${_git_status_ignore_submodules} --short
+- 'gwS' git status --ignore-submodules=${_git_status_ignore_submodules}
+- 'gwd' git diff --no-ext-diff
+- 'gwD' git diff --no-ext-diff --word-diff
+- 'gwr' git reset --soft
+- 'gwR' git reset --hard
+- 'gwc' git clean -n
+- 'gwC' git clean -f
+- 'gwx' git rm -r
+- 'gwX' git rm -rf
+
+### Tag (t)
+- 'gt' git tag
+- 'gtd' git tag -d
+
+### Upda/te Index (ui)
+- 'gui' git update-index --assume-unchanged
+
+### Show (w)
+- 'gw' git show
+
+### Underscore Functions
+- 'git_author_commits='git shortlog --summary --numbered'
+- 'git_config_vars='git config --global -l'
+- 'git_current_tag='git describe --abbrev=0 --tags'
+- 'git_push_deploy='git pull --rebase && git push && rake deploy'
+- 'git_standup="git log --since yesterday --author='$USERNAME' --pretty=oneline"
+- 'git_today="git log --since=midnight --author='$NAME' --oneline"
+- 'git_update_submodules='git submodule foreach git pull'
+# Push all repositories (even submodules)
+- 'git_push_all='git push --recurse-submodules=on-demand'
+# Will abort a push if you haven't pushed a submodule -- run when you push from parent directory
+- 'git_sane_push='git push --recurse-submodule=check'
 
 ### Shadows
 

@@ -48,11 +48,24 @@ fi
 #
 
 # General
-alias rb='ruby'
+# alias rb='ruby'
+
+alias rb='rbenv'
+alias rbi='rbenv install'
+alias rbil='rbenv install list'
+alias rbr='rbenv rehash'
+alias rbv='rbenv version'
+alias rbva='rbenv versions'
+alias update_rbenv='cd $HOME/.rbenv && git pull && cd -'
+alias update_ruby_build='cd $HOME/.rbenv/plugins/ruby-build && git pull && cd -'
 
 # Bundler
+
 if (( $+commands[bundle] )); then
   alias rbb='bundle'
+  alias be='bundle exec'
+  alias bi='bundle install'
+  alias bib='bundle install --binstubs'
   alias rbbe='bundle exec'
   alias rbbi='bundle install --path vendor/bundle'
   alias rbbl='bundle list'

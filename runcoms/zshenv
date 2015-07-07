@@ -6,23 +6,40 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+# ****************************************************
+#   Config
+# ****************************************************
 
-# Set the list of directories that Zsh searches for programs.
-path=(
-  "/usr/local/{bin,sbin}"
-  "$HOME/"
-  '/Applications/Postgres.app/Contents/Versions/9.4/bin'
-  '/usr/local/heroku/bin'
-  '/usr/local/bin'
-  "$HOME/.rbenv/bin"
-  '/usr/bin'
-  '/bin'
-  '/usr/sbin'
-  '/sbin'
-  '/opt/X11/bin'
-  '/usr/local/bin/git'
-  "$HOME/.dotfiles/bin"
-  )
+# ----- Exports ----- #
+export CLICOLOR=1
+export EDITOR='vim'
+export SHELL='/bin/bash'
 
-export DOTFILES=$HOME/.dotfiles
-export ZSH=$DOTFILES/zsh
+# ----- vi Editing Mode ----- #
+set -o vi
+
+# ----- rbenv ----- #
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# ----- Autojump ----- #
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
+# -----   NVM ----- #
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+# -----   Gulp Autocomplete -----#
+eval "$(gulp --completion=bash)"
+
+# ----------------------------------------------------
+#   Export Paths
+# ----------------------------------------------------
+
+export PATH="/usr/local/sbin:$PATH"
+NPM_PACKAGES=/Volumes/OSX_HD/Users/bradleybergeron/.npm-packages
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+PATH="$NPM_PACKAGES/bin:$PATH"
+NPM_PACKAGES=/Volumes/OSX_HD/Users/bradleybergeron/.npm-packages
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+export PATH=/bin:/Users/Bergeron/.rbenv/shims:/usr/local/{bin,sbin}:/Users/Bergeron/:/Applications/Postgres.app/Contents/Versions/9.4/bin:/usr/local/heroku/bin:/usr/local/bin:/Users/Bergeron/.rbenv/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/git:/Users/Bergeron/.dotfiles/bin:opt/rubies/
+export GOPATH=/Users/Bergeron/code/go_code

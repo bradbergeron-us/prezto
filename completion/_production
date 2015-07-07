@@ -1,0 +1,3 @@
+
+#compdef production
+compdef production=heroku

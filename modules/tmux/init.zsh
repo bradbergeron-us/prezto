@@ -45,5 +45,29 @@ fi
 # Aliases
 #
 
+alias tx='tmux'
 alias tmuxa="tmux $_tmux_iterm_integration new-session -A"
 alias tmuxl='tmux list-sessions'
+alias txa='tmux a -t'
+alias txd='tmux kill-session -t'
+alias txl='tmux ls'
+alias txn='tmux new -s'
+alias ta='tmux attach'
+alias txat='tmux attach -t'
+alias txov='tmux detach -a'
+alias txs='tmux source-file ~/.tmux.conf'
+alias txns='tmux new-session -s'
+alias txlsk='tmux list-keys'
+alias tlsk='tmux list-keys'
+alias ta='tmux attach'
+alias tls='tmux ls'
+alias tat='tmux attach -t'
+alias tns='tmux new-session -s'
+
+tmux-new() {
+  if [[ -n $TMUX ]]; then
+      tmux switch-client -t "$(TMUX= tmux -S "${TMUX%,*,*}" new-session -dP "$@")"
+      else
+          tmux new-session "$@"
+          fi
+        }

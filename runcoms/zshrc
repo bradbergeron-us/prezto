@@ -19,16 +19,13 @@ path=(
   '/opt/X11/bin'
   '/usr/local/bin/git'
   "$HOME/.dotfiles/bin"
+  "$HOME/.dotfiles/functions"
   "opt/rubies/"
   )
-# reload zsh config
-alias reload='source ~/.zshrc'
 
-# Tmuxinator
-source ~/.dotfiles/bin/tmuxinator.bash
 export DISABLE_AUTO_TITLE=true
-
 export EDITOR='vim'
+eval "$(rbenv init -)"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -37,67 +34,108 @@ else # OS X `ls`
     colorflag="-G"
 fi
 
-# Filesystem aliases
+# ================================== #
+#  Aliases                           #
+# ================================== #
+
+alias c='clear'
+alias reload='source ~/.zshrc'
+alias src='source ~/.zsh'
+alias vimrc='vim ~/.vimrc'
+alias tmc='vim ~/.tmux.conf'
+alias _alias='vim ~/.zshrc'
+
+# ----- Docker ----- #
+
+alias dm='docker-machine'
+
+# ----- Directory aliases ----- #
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias -- -='cd -'
+alias md='mkdir -p'
+alias mkdir="mkdir -p"
+alias mf='touch'
+alias p='less'
+alias src='source ~/.zshrc'
+alias sym='ln -s'
+
+# ----- Removal ----- #
+
+alias rmd='rm -rf'
+alias rmorig='find . -name *.orig -delete'
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
+
+# ----- Filesystem aliases -----#
 
 alias l="ls -lah ${colorflag}"
 alias la="ls -AF ${colorflag}"
 alias ll="ls -lFh ${colorflag}"
+alias ld='ls -lF'
 alias lld="ls -l | grep ^d"
 alias rmf="rm -rf"
 alias lh="ls -al"
 alias ln="ln -v"
-alias mkdir="mkdir -p"
+
+# ----- Listing ----- #
+
+alias l='ls -1F'
+alias la='ls -A1F'
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# ----- Shell Variables ----- #
+
 alias e="$EDITOR"
 alias v="$VISUAL"
-
-# Bundler
-alias b="bundle"
-
-# Rails
-alias migrate="rake db:migrate db:rollback && rake db:migrate"
-alias s="rspec"
-
+alias path="echo $PATH | tr ':' '\n'"
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
+# ----------------------------------------------------
+#   Files & Jumps
+# ----------------------------------------------------
+alias al="vim $ALIASES_PATH"
+alias bfunc="vim $GENERALFUNC_PATH"
+alias cd.="cd $DOTFILES_PATH"
+alias cdl="cd $DOTFILES_LOCAL_PATH"
+alias mappings="vim $VIM_MAPPINGS_PATH"
+alias rc="vim $VIMRC_PATH"
+alias vfiles="vim $VIM_FILES_PATH"
 
+# ----- Helpers ----- #
 
-# Helpers
 alias grep='grep --color=auto'
 alias df='df -h' # disk free, in Gigabytes, not bytes
 alias du='du -h -c' # calculate disk usage for a folder
+# File size
+alias fs="stat -f \"%z bytes\""
 
-# rake fix
-alias rake="noglob rake"
+# ----- Searching ----- #
+
+alias fa='alias | grep'
+alias grep='grep --color=auto'
+alias magic_numbers="ag -i '(FIXME: Magic number!)'" # `| wc -l` to get the count
+alias todos="ag -i '(TODO|FIX(ME)|NOTE?):'"
 
 # bower fix 
 alias bower="noglob bower"
 
-# Common Alias's
-eval "$(rbenv init -)"
-alias c='clear'
-alias src='source ~/.zsh'
-alias bower='noglob bower'
-alias dm='docker-machine'
-alias brewu= "brew update && brew upgrade && brew cleanup && brew prune && brew doctor"
-alias vimrc='vim ~/.vimrc'
-alias tmc='vim ~/.tmux.conf'
-
-
 # Applications
 alias mou='open -a Mou.app'
-alias mark='open -a Marked.app'
 alias ios='open -a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app'
+alias mate='open -a /Applications/Textmate.app'
 
-# Tmux 
-alias ta='tmux attach'
-alias tls='tmux ls'
-alias tat='tmux attach -t'
-alias tns='tmux new-session -s'
+
+# ----------------------------------------------------
+#   Network Tasks
+# ----------------------------------------------------
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -117,23 +155,139 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 # Trim new lines and copy to clipboard
 alias trimcopy="tr -d '\n' | pbcopy"
 
-# Recursively delete `.DS_Store` files
-alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
-
-# File size
-alias fs="stat -f \"%z bytes\""
-
 # ROT13-encode text. Works for decoding, too! ;)
 alias rot13='tr a-zA-Z n-za-mN-ZA-M'
-
-# Empty the Trash on all mounted volumes and the main HDD
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash"
-
-# Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
     alias "$method"="lwp-request -m '$method'"
 done
+
+# ----------------------------------------------------
+#   Utility Functions
+# ----------------------------------------------------
+
+# Change file extensions recursively in current directory
+#
+#   change-extension erb haml
+function change-extension() {
+  foreach f (**/*.$1)
+    mv $f $f:r.$2
+  end
+}
+
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+        LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+        LESS_TERMCAP_me=$'\E[0m' \
+        LESS_TERMCAP_se=$'\E[0m' \
+        LESS_TERMCAP_so=$'\E[38;5;246m' \
+        LESS_TERMCAP_ue=$'\E[0m' \
+        LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+        man "$@"
+}
+
+# Load .env file into shell session for environment variables
+function envup() {
+  if [ -f .env ]; then
+    export `cat .env`
+  else
+    echo 'No .env file found' 1>&2
+    return 1
+  fi
+}
+
+# No arguments: `git status`
+# With arguments: acts like `git`
+g() {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git status
+  fi
+}
+
+# Complete g like git
+compdef g=git
+
+# Make directory and change into it.
+
+function mcd() {
+  mkdir -p "$1" && cd "$1";
+}
+# ----------------------------------------------------
+#   Ag
+# ----------------------------------------------------
+
+alias a='ag'
+alias ac='ag --coffee'
+alias ah='ag --haml'
+alias as='ag --sass'
+
+# ----- Heroku ----- #
+
+alias hd='git push heroku master'
+alias hap='heroku accounts:set personal'
+alias haw='heroku accounts:set work'
+alias hrc='heroku run rails console'
+alias hrk='heroku run rake'
+
+# ----- GHI ----- #
+
+alias i='ghi'
+alias ia='ghi edit -u'
+alias iam='ghi edit --claim'
+alias ic='ghi close'
+alias icm='ghi comment -v'
+alias il='ghi list'
+alias ill='ghi list -L'
+alias ilm='ghi list --mine'
+alias ilma='ghi list -a --mine'
+alias is='ghi show'
+
+# ----------------------------------------------------
+#   Middleman
+# ----------------------------------------------------
+
+alias mmb='./bin/middleman build'
+alias mms='./bin/middleman s'
+
+# ----------------------------------------------------
+#   Miscellaneous
+# ----------------------------------------------------
+
+alias pomodoro='time-police 25'
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
+# ----------------------------------------------------
+#   NPM
+# ----------------------------------------------------
+
+alias ni='npm install'
+alias nin='npm init'
+alias nis='npm install --save'
+alias nisd='npm install --save-dev'
+alias npm_list='npm -g ls --depth=0'
+
+# ----------------------------------------------------
+#   Vim
+# ----------------------------------------------------
+
+# Disable C-s in terminal
+alias vim="stty stop '' -ixoff ; vim"
+
+alias v='vim'
+alias vi='vim'
+
+source=~/.prezto/completion
+# ----------------------------------------------------
+#   Export Paths
+# ----------------------------------------------------
+export PATH="/usr/local/sbin:$PATH"
+NPM_PACKAGES=/Volumes/OSX_HD/Users/bradleybergeron/.npm-packages
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+PATH="$NPM_PACKAGES/bin:$PATH"
+NPM_PACKAGES=/Volumes/OSX_HD/Users/bradleybergeron/.npm-packages
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+export PATH=/bin:/Users/Bergeron/.rbenv/shims:/usr/local/{bin,sbin}:/Users/Bergeron/:/Applications/Postgres.app/Contents/Versions/9.4/bin:/usr/local/heroku/bin:/usr/local/bin:/Users/Bergeron/.rbenv/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/git:/Users/Bergeron/.dotfiles/bin:opt/rubies/
+export GOPATH=/Users/Bergeron/code/go_code

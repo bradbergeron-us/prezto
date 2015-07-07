@@ -19,6 +19,10 @@ fi
 # Aliases
 #
 
+alias b='bundle'
+alias be='bundle exec'
+alias bi='bundle install'
+alias bib='bundle install --binstubs'
 alias ror='bundle exec rails'
 alias rorc='bundle exec rails console'
 alias rordc='bundle exec rails dbconsole'
@@ -33,3 +37,35 @@ alias rorr='bundle exec rails runner'
 alias rors='bundle exec rails server'
 alias rorsd='bundle exec rails server --debugger'
 alias rorx='bundle exec rails destroy'
+
+# ----- Pow ----- #
+
+alias pd='powder'
+alias pdl='powder link'
+alias pdo='powder open'
+alias pdr='powder restart'
+
+# ----- Rails ----- #
+
+alias ra='./bin/rails'
+alias rac='./bin/rails c'
+alias rag='./bin/rails g'
+alias ras='./bin/rails s'
+
+# ----- Rake ----- #
+
+alias rake="noglob rake"
+alias rk='./bin/rake'
+alias rkap='RAILS_ENV=development ./bin/rake assets:precompile'
+alias rkdbc='./bin/rake db:create'
+alias rkdbd='./bin/rake db:drop'
+alias rkdbm='./bin/rake db:migrate'
+alias rkdbr='./bin/rake db:reset'
+alias rkdbs='./bin/rake db:seed'
+alias rkdbt='./bin/rake db:setup'
+alias rkdy='rake deploy'
+
+
+# ----- Rails ----- #
+alias migrate="rake db:migrate db:rollback && rake db:migrate"
+alias s="rspec"

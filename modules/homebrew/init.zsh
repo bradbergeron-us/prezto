@@ -1,5 +1,5 @@
 #
-# Defines Homebrew aliases.
+# Defines Homebrew AKA Home'dog' aliases.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
@@ -14,6 +14,13 @@ fi
 # Aliases
 #
 
+# Dog Alias Homebrew = Dogbrew
+alias d='brew'
+alias di='brew install'
+alias dl='brew list'
+alias du='brew update'
+alias dg='brew upgrade'
+
 # Homebrew
 alias brewc='brew cleanup'
 alias brewC='brew cleanup --force'
@@ -23,6 +30,7 @@ alias brews='brew search'
 alias brewu='brew upgrade'
 alias brewU='brew update && brew upgrade'
 alias brewx='brew remove'
+alias beerfest='brew update && brew cleanup && brew prune && brew doctor'
 
 # Homebrew Cask
 alias cask='brew cask'
