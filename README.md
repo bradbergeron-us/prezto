@@ -1,6 +1,9 @@
 Zsh Built on Prezto Framework
 ==============================
 
+Prezto — Instantly Awesome Zsh
+==============================
+
 Prezto is the configuration framework for [Zsh][1]; it enriches the command line
 interface environment with sane defaults, aliases, functions, auto completion,
 and prompt themes.
@@ -18,9 +21,10 @@ version is 4.3.17.
   2. Clone the repository:
 
         git clone --recursive https://github.com/bradbergeron-us/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-        
+
   3. Create a new Zsh configuration by copying the Zsh configuration files
      provided:
+
         setopt EXTENDED_GLOB
         for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
           ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
@@ -107,7 +111,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 [1]: http://www.zsh.org
-[2]: http://i.imgur.com/AzjmpwM.png "sorin theme"
+[2]: http://i.imgur.com/nrGV6pg.png "sorin theme"
 [3]: http://git-scm.com
 [4]: https://github.com
 [5]: http://gitimmersion.com
