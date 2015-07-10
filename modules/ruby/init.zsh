@@ -18,7 +18,7 @@ else
 fi
 
 # Return if requirements are not found.
-if (( ! $+commands[ruby] && ! $+commands[rbenv] ) )); then
+if (( ! $+commands[ruby] && ! $+commands[rbenv] )); then
   return 1
 fi
 
