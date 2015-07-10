@@ -1,9 +1,9 @@
-# Executes commands at the start of an interactive session.
+# Executes commands at the start of an interactive sessionJj.
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
-# Customize to your needs...
+
 # Set the list of directories that Zsh searches for programs.
 path=(
   "/usr/local/{bin,sbin}"
@@ -19,79 +19,34 @@ path=(
   '/opt/X11/bin'
   '/usr/local/bin/git'
   "$HOME/.dotfiles/bin"
-  "$HOME/.dotfiles/functions"
   "opt/rubies/"
   )
 
+# Customize to your needs...
+# -----------------------------------
+
+# ENV Variables
 export DISABLE_AUTO_TITLE=true
 export EDITOR='vim'
-eval "$(rbenv init -)"
 
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-    colorflag="--color"
-else # OS X `ls`
-    colorflag="-G"
-fi
+#  Aliases
+# -------------------------------------
 
-# ================================== #
-#  Aliases                           #
-# ================================== #
-
+# Find all aliases
+alias fa='alias | grep'
 alias c='clear'
 alias reload='source ~/.zshrc'
 alias src='source ~/.zsh'
 alias vimrc='vim ~/.vimrc'
+alias vpart='vim ~/.vim/partials'
 alias tmc='vim ~/.tmux.conf'
 alias _alias='vim ~/.zshrc'
-
-# ----- Docker ----- #
-
-alias dm='docker-machine'
-
-# ----- Directory aliases ----- #
-
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias -- -='cd -'
-alias md='mkdir -p'
-alias mkdir="mkdir -p"
 alias mf='touch'
 alias p='less'
 alias src='source ~/.zshrc'
 alias sym='ln -s'
 
-# ----- Removal ----- #
-
-alias rmd='rm -rf'
-alias rmorig='find . -name *.orig -delete'
-# Recursively delete `.DS_Store` files
-alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
-
-# ----- Filesystem aliases -----#
-
-alias l="ls -lah ${colorflag}"
-alias la="ls -AF ${colorflag}"
-alias ll="ls -lFh ${colorflag}"
-alias ld='ls -lF'
-alias lld="ls -l | grep ^d"
-alias rmf="rm -rf"
-alias lh="ls -al"
-alias ln="ln -v"
-
-# ----- Listing ----- #
-
-alias l='ls -1F'
-alias la='ls -A1F'
-
-# Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-
 # ----- Shell Variables ----- #
-
 alias e="$EDITOR"
 alias v="$VISUAL"
 alias path="echo $PATH | tr ':' '\n'"
@@ -101,6 +56,7 @@ alias path='echo $PATH | tr -s ":" "\n"'
 # ----------------------------------------------------
 #   Files & Jumps
 # ----------------------------------------------------
+
 alias al="vim $ALIASES_PATH"
 alias bfunc="vim $GENERALFUNC_PATH"
 alias cd.="cd $DOTFILES_PATH"
@@ -109,120 +65,15 @@ alias mappings="vim $VIM_MAPPINGS_PATH"
 alias rc="vim $VIMRC_PATH"
 alias vfiles="vim $VIM_FILES_PATH"
 
-# ----- Helpers ----- #
-
-alias grep='grep --color=auto'
-alias df='df -h' # disk free, in Gigabytes, not bytes
-alias du='du -h -c' # calculate disk usage for a folder
-# File size
-alias fs="stat -f \"%z bytes\""
-
-# ----- Searching ----- #
-
-alias fa='alias | grep'
-alias grep='grep --color=auto'
-alias magic_numbers="ag -i '(FIXME: Magic number!)'" # `| wc -l` to get the count
-alias todos="ag -i '(TODO|FIX(ME)|NOTE?):'"
-
-# bower fix 
-alias bower="noglob bower"
-
-# Applications
-alias mou='open -a Mou.app'
-alias ios='open -a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app'
-alias mate='open -a /Applications/Textmate.app'
-
-
-# ----------------------------------------------------
-#   Network Tasks
-# ----------------------------------------------------
-
-# IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en1"
-alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
-
-# Enhanced WHOIS lookups
-alias whois="whois -h whois-servers.net"
-
-# Flush Directory Service cache
-alias flush="dscacheutil -flushcache"
-
-# View HTTP traffic
-alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
-
-# Trim new lines and copy to clipboard
-alias trimcopy="tr -d '\n' | pbcopy"
-
-# ROT13-encode text. Works for decoding, too! ;)
-alias rot13='tr a-zA-Z n-za-mN-ZA-M'
-
-# One of @janmoesen’s ProTip™s
-for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-    alias "$method"="lwp-request -m '$method'"
-done
-
-# ----------------------------------------------------
-#   Utility Functions
-# ----------------------------------------------------
-
-# Change file extensions recursively in current directory
-#
-#   change-extension erb haml
-function change-extension() {
-  foreach f (**/*.$1)
-    mv $f $f:r.$2
-  end
-}
-
-man() {
-    env LESS_TERMCAP_mb=$'\E[01;31m' \
-        LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-        LESS_TERMCAP_me=$'\E[0m' \
-        LESS_TERMCAP_se=$'\E[0m' \
-        LESS_TERMCAP_so=$'\E[38;5;246m' \
-        LESS_TERMCAP_ue=$'\E[0m' \
-        LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-        man "$@"
-}
-
-# Load .env file into shell session for environment variables
-function envup() {
-  if [ -f .env ]; then
-    export `cat .env`
-  else
-    echo 'No .env file found' 1>&2
-    return 1
-  fi
-}
-
-# No arguments: `git status`
-# With arguments: acts like `git`
-g() {
-  if [[ $# > 0 ]]; then
-    git $@
-  else
-    git status
-  fi
-}
-
-# Complete g like git
-compdef g=git
-
-# Make directory and change into it.
-
-function mcd() {
-  mkdir -p "$1" && cd "$1";
-}
-# ----------------------------------------------------
-#   Ag
-# ----------------------------------------------------
+# ----- Ag ----- #
 
 alias a='ag'
 alias ac='ag --coffee'
 alias ah='ag --haml'
 alias as='ag --sass'
+
+# ----- Docker ----- #
+alias dm='docker-machine'
 
 # ----- Heroku ----- #
 
@@ -279,7 +130,23 @@ alias vim="stty stop '' -ixoff ; vim"
 alias v='vim'
 alias vi='vim'
 
-source=~/.prezto/completion
+# ----------------------------------------------------
+# Functions
+# ----------------------------------------------------
+
+# Colored Man Pages
+
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+        LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+        LESS_TERMCAP_me=$'\E[0m' \
+        LESS_TERMCAP_se=$'\E[0m' \
+        LESS_TERMCAP_so=$'\E[38;5;246m' \
+        LESS_TERMCAP_ue=$'\E[0m' \
+        LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+        man "$@"
+}
+
 # ----------------------------------------------------
 #   Export Paths
 # ----------------------------------------------------

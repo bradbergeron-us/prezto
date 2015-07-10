@@ -26,3 +26,8 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 
 # Pushes directory to the current Finder directory.
 alias pushdf='pushd "$(pfd)"'
+
+# Applications
+alias mou='open -a Mou.app'
+alias ios='open -a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app'
+alias mate='open -a /Applications/Textmate.app'

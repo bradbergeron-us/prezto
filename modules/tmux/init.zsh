@@ -6,7 +6,7 @@
 #   Colin Hebert <hebert.colin@gmail.com>
 #   Georges Discry <georges@discry.be>
 #   Xavier Cambar <xcambar@gmail.com>
-#
+#   Bradley Bergeron <bergeron.bradley@gmail.com>
 
 # Return if requirements are not found.
 if (( ! $+commands[tmux] )); then
@@ -48,12 +48,13 @@ fi
 alias tx='tmux'
 alias tmuxa="tmux $_tmux_iterm_integration new-session -A"
 alias tmuxl='tmux list-sessions'
+alias txl='tmux ls'
 alias txa='tmux a -t'
 alias txd='tmux kill-session -t'
-alias txl='tmux ls'
 alias txn='tmux new -s'
 alias ta='tmux attach'
 alias txat='tmux attach -t'
+# Useful when your screen gets resized!
 alias txov='tmux detach -a'
 alias txs='tmux source-file ~/.tmux.conf'
 alias txns='tmux new-session -s'

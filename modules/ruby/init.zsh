@@ -1,18 +1,6 @@
 #
 # Configures Ruby local gem installation, loads version managers, and defines
 # aliases.
-#
-# Authors: Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-# Load RVM into the shell session.
-if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
-  # Unset AUTO_NAME_DIRS since auto adding variable-stored paths to ~ list
-  # conflicts with RVM.
-  unsetopt AUTO_NAME_DIRS
-
-  # Source RVM.
-  source "$HOME/.rvm/scripts/rvm"
 
 # Load manually installed rbenv into the shell session.
 elif [[ -s "$HOME/.rbenv/bin/rbenv" ]]; then
@@ -23,15 +11,6 @@ elif [[ -s "$HOME/.rbenv/bin/rbenv" ]]; then
 elif (( $+commands[rbenv] )); then
   eval "$(rbenv init - --no-rehash zsh)"
 
-# Load package manager installed chruby into the shell session.
-elif (( $+commands[chruby-exec] )); then
-  source "${commands[chruby-exec]:h:h}/share/chruby/chruby.sh"
-  if zstyle -t ':prezto:module:ruby:chruby' auto-switch; then
-    source "${commands[chruby-exec]:h:h}/share/chruby/auto.sh"
-
-    # If a default Ruby is set, switch to it.
-    chruby_auto
-  fi
 
 # Prepend local gems bin directories to PATH.
 else
@@ -39,7 +18,7 @@ else
 fi
 
 # Return if requirements are not found.
-if (( ! $+commands[ruby] && ! ( $+commands[rvm] || $+commands[rbenv] ) )); then
+if (( ! $+commands[ruby] && ! $+commands[rbenv] ) )); then
   return 1
 fi
 
@@ -48,8 +27,6 @@ fi
 #
 
 # General
-# alias rb='ruby'
-
 alias rb='rbenv'
 alias rbi='rbenv install'
 alias rbil='rbenv install list'

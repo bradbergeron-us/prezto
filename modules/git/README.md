@@ -330,26 +330,26 @@ setting a style is as follows.
 
 ### Main Contexts
 
-| Name      | Format Code | Description
-| --------- | :---------: | ---------------------------------------------------
-| action    |     %s      | Special action name
-| ahead     |     %A      | Commits ahead of remote count
-| behind    |     %B      | Commits behind of remote count
-| branch    |     %b      | Branch name
-| commit    |     %c      | Commit hash
-| position  |     %p      | Commits from the nearest tag count
-| remote    |     %R      | Remote name
-| stashed   |     %S      | Stashed states count
+| Name     | Format Code | Description                        |
+|:---------|:-----------:|:-----------------------------------|
+| action   |     %s      | Special action name                |
+| ahead    |     %A      | Commits ahead of remote count      |
+| behind   |     %B      | Commits behind of remote count     |
+| branch   |     %b      | Branch name                        |
+| commit   |     %c      | Commit hash                        |
+| position |     %p      | Commits from the nearest tag count |
+| remote   |     %R      | Remote name                        |
+| stashed  |     %S      | Stashed states count               |
 
 ### Concise Contexts
 
-| Name      | Format Code | Description
-| --------- | :---------: | ---------------------------------------------------
-| clean     |     %C      | Clean state
-| dirty     |     %D      | Dirty files count
-| indexed   |     %i      | Indexed files count
-| unindexed |     %I      | Unindexed files count
-| untracked |     %u      | Untracked files count
+| Name      | Format Code | Description           |
+|:----------|:-----------:|:----------------------|
+| clean     |     %C      | Clean state           |
+| dirty     |     %D      | Dirty files count     |
+| indexed   |     %i      | Indexed files count   |
+| unindexed |     %I      | Unindexed files count |
+| untracked |     %u      | Untracked files count |
 
 The following contexts must be enabled with the following zstyle:
 
@@ -357,29 +357,29 @@ The following contexts must be enabled with the following zstyle:
 
 ### Verbose Contexts
 
-| Name      | Format Code | Description
-| --------- | :---------: | ---------------------------------------------------
-| added     |     %a      | Added files count
-| clean     |     %C      | Clean state
-| deleted   |     %d      | Deleted files count
-| dirty     |     %D      | Dirty files count
-| modified  |     %m      | Modified files count
-| renamed   |     %r      | Renamed files count
-| unmerged  |     %U      | Unmerged files count
-| untracked |     %u      | Untracked files count
+| Name      | Format Code | Description           |
+|:----------|:-----------:|:----------------------|
+| added     |     %a      | Added files count     |
+| clean     |     %C      | Clean state           |
+| deleted   |     %d      | Deleted files count   |
+| dirty     |     %D      | Dirty files count     |
+| modified  |     %m      | Modified files count  |
+| renamed   |     %r      | Renamed files count   |
+| unmerged  |     %U      | Unmerged files count  |
+| untracked |     %u      | Untracked files count |
 
 ### Special Action Contexts
 
-| Name                 |   Format    | Description
-| -------------------- | :---------: | -----------------------------------------
-| apply                |    value    | Applying patches
-| bisect               |    value    | Binary searching for changes
-| cherry-pick          |    value    | Cherry picking
-| cherry-pick-sequence |    value    | Cherry picking sequence
-| merge                |    value    | Merging
-| rebase               |    value    | Rebasing
-| rebase-interactive   |    value    | Rebasing interactively
-| rebase-merge         |    value    | Rebasing merge
+| Name                 | Format | Description                  |
+|:---------------------|:------:|:-----------------------------|
+| apply                | value  | Applying patches             |
+| bisect               | value  | Binary searching for changes |
+| cherry-pick          | value  | Cherry picking               |
+| cherry-pick-sequence | value  | Cherry picking sequence      |
+| merge                | value  | Merging                      |
+| rebase               | value  | Rebasing                     |
+| rebase-interactive   | value  | Rebasing interactively       |
+| rebase-merge         | value  | Rebasing merge               |
 
 First, format the repository state attributes. For example, to format the branch
 and remote names, define the following styles.

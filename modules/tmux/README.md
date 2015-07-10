@@ -42,8 +42,29 @@ Read [iTerm2 and tmux Integration][7] for more information.
 Aliases
 -------
 
-  - `tmuxa` attaches or switches to a tmux session.
-  - `tmuxl` lists sessions managed by the tmux server.
+| Alias | Shell Command Performed
+|
+|`tmuxa`| attaches or switches to a tmux session.                 |
+|`tmuxl`| lists sessions managed by the tmux server.              |
+|`tx`   | tmux                                                    |
+|`tmuxa`| tmux $_tmux_iterm_integration new-session -A"           |
+|`tmuxl`| tmux list-sessions                                      |
+|`txa`  | tmux a -t                                               |
+|`txd`  | tmux kill-session -t                                    |
+|`txl`  | tmux ls                                                 |
+|`txn`  | tmux new -s                                             |
+|`ta`   | tmux attach                                             |
+|`txat` | tmux attach -t                                          |
+|`txov` | tmux detach -a  *Useful when your screen gets resized!* |
+|`txs`  | tmux source-file -f ~/.tmux.conf                        |
+|`txns` | tmux new-session -s                                     |
+|`txlsk`| tmux list-keys                                          |
+|`tlsk` | tmux list-keys                                          |
+|`ta`   | tmux attach                                             |
+|`tls`  | tmux ls                                                 |
+|`tat`  | tmux attach -t                                          |
+|`tns`  | tmux new-session -s                                     |
+
 
 Caveats
 -------
