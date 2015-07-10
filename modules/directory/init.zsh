@@ -27,4 +27,21 @@ unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
 #
 
 alias d='dirs -v'
-for index ({1..9}) alias "$index"="cd +${index}"; unset index
+for index ({1..9}) alias "$index"="cd +${index}"; unset indexI
+
+# Directory aliases
+# -----------------
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias -- -='cd -'
+alias md='mkdir -p'
+
+
+# File Removal
+# -----------------
+alias rmd='rm -rf'
+alias rmorig='find . -name *.orig -delete'
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
