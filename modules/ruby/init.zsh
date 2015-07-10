@@ -3,7 +3,7 @@
 # aliases.
 
 # Load manually installed rbenv into the shell session.
-elif [[ -s "$HOME/.rbenv/bin/rbenv" ]]; then
+if [[ -s "$HOME/.rbenv/bin/rbenv" ]]; then
   path=("$HOME/.rbenv/bin" $path)
   eval "$(rbenv init - --no-rehash zsh)"
 
