@@ -47,7 +47,3 @@ export PROJECT_HOME="$HOME/code/python-projects"
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 # ruby => Can be so tempermental
 export PATH=/bin:/Users/Bergeron/.rbenv/shims:/usr/local/{bin,sbin}:/Users/Bergeron/:/Applications/Postgres.app/Contents/Versions/9.4/bin:/usr/local/heroku/bin:/usr/local/bin:/Users/Bergeron/.rbenv/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/git:/Users/Bergeron/.dotfiles/bin:opt/rubies/
-<<<<<<< HEAD
-=======
-
->>>>>>> get caught up
