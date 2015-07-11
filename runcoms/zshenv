@@ -5,9 +5,6 @@
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-
-# ****************************************************
-#   Config
 # ****************************************************
 
 # ----- Exports ----- #
@@ -17,17 +14,6 @@ export SHELL='/bin/zsh'
 
 # ----- vi Editing Mode ----- #
 set -o vi
-
-# ----- rbenv ----- #
-eval "$(rbenv init - zsh)"
-
-# ----- Autojump ----- #
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-
-# -----   NVM ----- #
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
 
 # ----------------------------------------------------
 #   Export Paths
