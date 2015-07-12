@@ -29,7 +29,7 @@ path=(
 export DISABLE_AUTO_TITLE=true
 export EDITOR='vim'
 
-source '~/.dotfiles/git/hooks'
+source '~/.dotfiles/git/templates/hooks/run-hooks.sh'
 
 #  Aliases
 # -------------------------------------
