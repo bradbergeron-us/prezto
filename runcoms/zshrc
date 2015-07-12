@@ -29,6 +29,8 @@ path=(
 export DISABLE_AUTO_TITLE=true
 export EDITOR='vim'
 
+source '~/.dotfiles/git/hooks'
+
 #  Aliases
 # -------------------------------------
 
@@ -36,10 +38,10 @@ export EDITOR='vim'
 alias fa='alias | grep'
 alias c='clear'
 alias reload='source ~/.zshrc'
-alias src='source ~/.zsh'
 alias vimrc='vim ~/.vimrc'
 alias vpart='vim ~/.vim/partials'
 alias tmc='vim ~/.tmux.conf'
+alias zrc='vim ~/.zshrc'
 alias _alias='vim ~/.zshrc'
 alias mf='touch'
 alias p='less'
