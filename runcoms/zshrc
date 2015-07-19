@@ -157,6 +157,5 @@ NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 PATH="$NPM_PACKAGES/bin:$PATH"
 NPM_PACKAGES=/Volumes/OSX_HD/Users/bradleybergeron/.npm-packages
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-export PATH=/bin:/Users/Bergeron/.rbenv/shims:/usr/local/{bin,sbin}
+export PATH=/bin:/Users/Bergeron/.rbenv/shims:/usr/local/{bin,sbin}:/Users/Bergeron/:/Applications/Postgres.app/Contents/Versions/9.4/bin:/usr/local/heroku/bin:/usr/local/bin:/Users/Bergeron/.rbenv/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/git:/Users/Bergeron/.dotfiles/bin:opt/rubies/
 export GOPATH=/Users/Bergeron/code/go_code
-export RBENV_ROOT=/usr/local/var/rbenv
