@@ -28,7 +28,8 @@ path=(
 # ENV Variables
 export DISABLE_AUTO_TITLE=true
 export EDITOR='im'
-source '~/.git/templates/hooks/run-hooks.sh'
+
+source ~/.bin/tmuxinator.zsh
 
 #  Aliases
 # -------------------------------------
