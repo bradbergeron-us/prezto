@@ -32,9 +32,10 @@ fi
 path=(
   /usr/local/{bin,sbin}
   $path
+  ~/.rbenv/
 )
 
-
+eval "$(rbenv init -)"
 # ----- Less ----- #
 
 # Set the default Less options.
