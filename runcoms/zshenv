@@ -7,7 +7,6 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 fi
 # ****************************************************
 
-eval "$(rbenv init -)"
 # ----- Exports ----- #
 export CLICOLOR=1
 export EDITOR='vim'
