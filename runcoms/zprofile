@@ -35,7 +35,6 @@ path=(
   ~/.rbenv/
 )
 
-eval "$(rbenv init -)"
 # ----- Less ----- #
 
 # Set the default Less options.

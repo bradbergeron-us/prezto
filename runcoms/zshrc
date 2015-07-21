@@ -27,9 +27,7 @@ path=(
 
 # ENV Variables
 export DISABLE_AUTO_TITLE=true
-export EDITOR='im'
-
-source ~/.bin/tmuxinator.zsh
+export EDITOR'vim'
 
 #  Aliases
 # -------------------------------------
@@ -41,6 +39,8 @@ alias reload='source ~/.zshrc'
 alias vimrc='vim ~/.vimrc'
 alias vpart='vim ~/.vim/partials'
 alias tmc='vim ~/.tmux.conf'
+alias dot='cd ~/.dotfiles'
+alias dts='vim ~/.dotfiles'
 alias zrc='vim ~/.zshrc'
 alias _alias='vim ~/.zshrc'
 alias mf='touch'
@@ -160,3 +160,6 @@ NPM_PACKAGES=/Volumes/OSX_HD/Users/bradleybergeron/.npm-packages
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 export PATH=/bin:/Users/Bergeron/.rbenv/shims:/usr/local/{bin,sbin}:/Users/Bergeron/:/Applications/Postgres.app/Contents/Versions/9.4/bin:/usr/local/heroku/bin:/usr/local/bin:/Users/Bergeron/.rbenv/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/git:/Users/Bergeron/.dotfiles/bin:opt/rubies/
 export GOPATH=/Users/Bergeron/code/go_code
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+source ~/.profile
