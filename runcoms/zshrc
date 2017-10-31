@@ -6,19 +6,19 @@ fi
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  "$HOME/.rbenv/bin"
+  "$HOME/.dotfiles/bin"
   "/usr/local/{bin,sbin}"
-  "$HOME/"
   '/Applications/Postgres.app/Contents/Versions/9.4/bin'
   '/usr/local/heroku/bin'
   '/usr/local/bin'
-  "$HOME/.rbenv/bin"
+  'usr/local/lib'
   '/usr/bin'
   '/bin'
   '/usr/sbin'
   '/sbin'
   '/opt/X11/bin'
   '/usr/local/bin/git'
-  "$HOME/.dotfiles/bin"
   )
 
 # Customize to your needs...
@@ -165,4 +165,7 @@ NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 export PATH=/bin:/Users/Bergeron/.rbenv/shims:/usr/local/{bin,sbin}:/Users/Bergeron/:/Applications/Postgres.app/Contents/Versions/9.4/bin:/usr/local/heroku/bin:/usr/local/bin:/Users/Bergeron/.rbenv/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/git:/Users/Bergeron/.dotfiles/bin:opt/rubies/
 source ~/.profile
 
+eval "$(rbenv init -)"
+
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
